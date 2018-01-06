@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+{% include "navbar.html" %}
+
+    <div class="col-sm-9">
+      
+	  <h2><small>RECENT CLOTHING ADDED</small></h2>
+	  {% for latest in latest_ten %}
+      <hr class="style-eight">
+      <h4>{{latest.name}}</h4>
+      {% for user in users %}
+        {%if latest.user_id == user.id %}
+        <h5><span class="glyphicon glyphicon-time"></span> Added by {{user.name}}</h5>
+        {% endif %}
+      {% endfor %}
+      {% for clothing_type in clothing_types %}
+        {%if latest.type_id == clothing_type.id %}
+        <h5><span class="label label-primary">{{clothing_type.name}}</span><a href = "{{url_for('showDetail', clothing_type=clothing_type.name, clothing_id=latest.id)}}"> [Details]</a></h5><br>
+        {% endif %}
+      {% endfor %}
+      <p>{{latest.description}}</p>
+	  {% endfor %}
+    <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner menu">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{ clothing_type.name }}
+			<figure class="creator">
+				<img src="#">
+				<figcaption>creator name</figcaption>
+			</figure>
+			</h1>
+
+		</div>
+	</div>
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			
+		</div>
+		<div class="col-md-7"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul>
+						{% for message in messages %}
+							 <li> <strong> {{ message }} </strong> </li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			{% endwith %}
+		</div>
+	</div>
+    {% if items !=[] %}
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                        {% for i in items %}
+                        <a href = "{{url_for('viewClothing', clothing_type=clothing_type.name, clothing_id=i.id)}}">
+                                <div class="menu-item">
+                                    <h3>{{i.name}}</h3>
+                                    
+                                </div>
+                        {% endfor %}
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </a>
+    {% else %}
+       <div class="row">
+             <div class="col-md-1"></div>
+             <div class="col-md-3">
+                 <span>"There are no items"</span>
+             </div>
+            <div class="col-md-1"></div>
+            </div>
+    {% endif %}
+{% endblock %}

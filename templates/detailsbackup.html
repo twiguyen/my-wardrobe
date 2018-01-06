@@ -1,0 +1,57 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner menu">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{ clothing_type.name }}
+			<figure class="creator">
+				<img src="#">
+				<figcaption>creator name</figcaption>
+			</figure>
+			</h1>
+
+		</div>
+	</div>
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			
+		</div>
+		<div class="col-md-7"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul>
+						{% for message in messages %}
+							 <li> <strong> {{ message }} </strong> </li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			{% endwith %}
+		</div>
+	</div>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<h2>Details</h2>
+					<div class="menu-item">
+						<h3>{{item.name}}</h3>
+						<p>{{item.description}}</p>
+						<span>This current item type id is {{item.type_id}}</span>
+						<span>This current item clothesType is {{item.clothesType}}</span>
+						<span>The current clothing type is {{clothing_type.name}}</span>
+						<span>The current clothing type id is {{clothing_type.id}}</span>
+						<span>The current clothing item id is {{item.id}}</span>
+                        <a href = "{{url_for('editClothing', clothing_type=clothing_type.name, clothing_id=item.id)}}">edit</a>-->
+                        <a href = "{{url_for('deleteClothing', clothing_type=clothing_type.name, clothing_id=item.id)}}">delete</a>-->				
+                    </div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+{% endblock %}

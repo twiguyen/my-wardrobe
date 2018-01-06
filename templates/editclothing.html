@@ -1,0 +1,46 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+{% include "navbar.html" %}
+
+<div class="col-sm-9">
+		
+	<h4><small>Edit {{clothes_type.name}}</small></h4>
+	<hr>
+	<form action="" method = "post">
+			<div class="form-group">
+				<label for="name">Name:</label>
+				<input type ="text" class="form-control" name="name" value="{{item.name}}">
+
+				<label for="description">Description:</label>
+				<textarea class="form-control" maxlength="250" rows="3" name="description">{{item.description}}</textarea>
+
+			<label for="type">Clothing Type:</label>
+				<div class="dropbox">
+					<select name="type">
+						<option value="Accessories" {% if clothes_type.name =="Accessories"%}selected{%endif%}>Accessories</option>
+						<option  value="Bottoms" {% if clothes_type.name =="Bottoms"%}selected{%endif%}>Bottoms</option>
+						<option  value="Dresses" {% if clothes_type.name =="Dresses"%}selected{%endif%}>Dresses</option>				
+						<option  value="Outerwear" {% if clothes_type.name =="Outerwear"%}selected{%endif%}>Outerwear</options>
+						<option  value="Shoes" {% if clothes_type.name =="Shoes"%}selected{%endif%}>Shoes</options>
+						<option  value="Sweaters" {% if clothes_type.name =="Sweaters"%}selected{%endif%}>Sweaters</options>
+						<option  value="Tops" {% if clothes_type.name =="Tops"%}selected{%endif%}>Tops</options>
+					</select>
+				</div>
+
+				<div class="padding-bottom"></div>
+				<button type="submit" class="btn btn-default" id="submit">
+				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save</button>
+				<a href = "{{url_for('showWardrobe')}}">
+					<button type="button" class="btn btn-default delete">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
+				</a>
+
+			</form>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+{% include "navbar.html" %}
+
+<div class="col-sm-9">
+		
+		<h4><small>{{clothing_type.name}}</small></h4>
+		{% if items !=[] %}
+			{% for i in items %}
+			<hr>
+			<a href = "{{url_for('showDetail', clothing_type=clothing_type.name, clothing_id=i.id)}}">
+				<h3>{{i.name}}</h3>
+			</a>
+			{% endfor %}
+		{% else %}
+			<span>"There are no items"</span>
+		{% endif %}	
+		<hr>
+	</div>
+  </div>
+</div>
+</div>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}

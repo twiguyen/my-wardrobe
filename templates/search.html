@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+{% include "navbar.html" %}
+
+<div class="col-sm-9">
+		<h4><small>Search results</small></h4>
+		{% for result in results %}
+			{% for clothing_type in clothing_types %}
+				{% if clothing_type.id == result.type_id %}
+				<br><a href = "{{url_for('showDetail', clothing_type=clothing_type.name, clothing_id=result.id)}}"><span>{{result.name}}</span></a>
+				<br>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+{% include "footer.html" %}
+{% endblock %}

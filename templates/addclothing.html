@@ -1,0 +1,58 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+{% include "navbar.html" %}
+		<div class="col-sm-9">
+			<form action="#" method = "post">
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input type ="text" maxlength="50" class="form-control" name="name"placeholder="Name of the clothing" required>
+
+					<label for="description">Description:</label>
+					<textarea class="form-control" maxlength="250" rows="3" name="description" placeholder="Description of the clothing"></textarea>
+
+					<label for="course">Type:</label>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="type" id="type1" value="Outerwear">Outerwear
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="type" id="type2" value="Sweaters">Sweaters
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="type" id="type3" value="Tops">Tops
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="type" id="type4" value="Dresses">Dresses
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="type" id="type5" value="Shoes">Shoes
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="type" id="type6" value="Accessories">Accessories
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="type" id="type7" value="Bottoms">Bottoms
+					  </label>
+					</div>
+					<button type="submit" class="btn btn-default" id="submit">
+					<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> Create</button>
+				</div>
+			</form>
+		</div>
+	</div>
+{% include "footer.html" %}
+{% endblock %}
+
