@@ -403,6 +403,12 @@ def new_user():
                                clothing_types=clothing_types)
 
 
+# Log in as user
+@app.route('/userlogin')
+def userLogin():
+    return (render_template('userlogin.html', clothing_types=clothing_types))
+
+
 # Show all items of a clothing type
 @app.route('/mywardrobe/<string:clothing_type>')
 def showClothing(clothing_type):
