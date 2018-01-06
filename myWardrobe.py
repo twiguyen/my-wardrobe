@@ -296,6 +296,20 @@ def gdisconnect():
         return response
 
 
+# DISCONNECT - Revoke a current user's token and reset their login_session for custom users
+@app.route('/cdisconnect')
+def cdisconnect():
+
+    # Reset the user's sesson.
+    del login_session['username']
+    del login_session['email']
+    del login_session['picture']
+
+    response = make_response(json.dumps('Successfully disconnected.'), 200)
+    response.headers['Content-Type'] = 'application/json'
+    return response
+
+
 # Disconnect based on provider
 @app.route('/disconnect')
 def disconnect():
@@ -305,6 +319,10 @@ def disconnect():
 
         if login_session['provider'] == 'facebook':
             fbdisconnect()
+
+        if login_session['provider'] == 'custom':
+            cdisconnect()
+
         flash("You have successfully been logged out.")
         return redirect(url_for('showWardrobe'))
     else:
@@ -354,6 +372,35 @@ def showWardrobe():
     )
     return (render_template('latestten.html', clothing_types=clothing_types,
             latest_ten=latest_ten, users=users))
+
+
+#@app.route('/register', methods = ['POST'])
+#def new_user():
+#    username = request.json.get('username')
+#    password = request.json.get('password')
+#    if username is None or password is None:
+#        abort(400) # missing arguments
+#    if session.query(Password).filter_by(username = username).first() is not None:
+#        abort(400) # existing user
+#    user = Password(username = username)
+#    user.hash_password(password)
+#    session.add(user)
+#    session.commit()
+#    return jsonify({ 'username': user.username }), 201, {'Location': url_for('get_user', id = user.id, _external = True)}
+
+# Create a new user
+@app.route('/register', methods=['GET', 'POST'])
+def new_user():
+    if request.method == 'POST':
+        session.add(newClothing)
+        session.commit()
+        flash("New Clothing '%s' Item Successfully Created"
+              % (newClothing.name))
+        return redirect(url_for('showClothing',
+                                clothing_type=clothesType.name))
+    else:
+        return render_template('register.html',
+                               clothing_types=clothing_types)
 
 
 # Show all items of a clothing type
