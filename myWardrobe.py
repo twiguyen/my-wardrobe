@@ -148,7 +148,7 @@ def createUser(login_session):
 def getUserInfo(user_id):
     user = session.query(User).filter_by(id=user_id).one()
     return user
-
+    
 
 def getUserID(email):
     try:
@@ -390,23 +390,71 @@ def showWardrobe():
 
 # Create a new user
 @app.route('/register', methods=['GET', 'POST'])
-def new_user():
+def newUser():
     if request.method == 'POST':
-        session.add(newClothing)
-        session.commit()
-        flash("New Clothing '%s' Item Successfully Created"
-              % (newClothing.name))
-        return redirect(url_for('showClothing',
-                                clothing_type=clothesType.name))
+        login_session['username'] = request.form['username']
+        login_session['provider'] = 'custom'
+        login_session['picture'] = request.form['picture']
+        login_session['email'] = request.form['email']
+
+        # See if a user exists, if it doesn't make a new one
+        user_id = getUserID(login_session['email'])
+        if not user_id:
+            user_id = createUser(login_session)
+        login_session['user_id'] = user_id
+
+        output = ''
+        output += '<h1>Welcome, '
+        output += login_session['username']
+
+        output += '!</h1>'
+        output += '<img src="'
+        output += login_session['picture']
+        output += ' " style = "width: 300px; height: 300px;border-radius: '
+        output += '150px;-webkit-border-radius: 150px;-moz-border-radius: '
+        output += '150px;"> '
+
+        flash("Now logged in as %s" % login_session['username'])
+        return output
     else:
         return render_template('register.html',
                                clothing_types=clothing_types)
 
 
 # Log in as user
-@app.route('/userlogin')
+@app.route('/userlogin', methods=['GET', 'POST'])
 def userLogin():
-    return (render_template('userlogin.html', clothing_types=clothing_types))
+    if request.method == 'POST':
+        login_session['email'] = request.form['email']
+        login_session['password'] = request.form['password']
+        user_id = getUserID(login_session['email'])
+        
+        if not user_id:
+            output = 'Please create a new user'
+            return output
+        else:
+            user = getUserInfo(user_id)
+            login_session['user_id'] = user.id
+            login_session['username'] = user.name
+            login_session['provider'] = 'custom'
+            login_session['picture'] = user.picture
+            login_session['email'] = request.form['email']
+
+            output = ''
+            output += '<h1>Welcome, '
+            output += login_session['username']
+
+            output += '!</h1>'
+            output += '<img src="'
+            output += login_session['picture']
+            output += ' " style = "width: 300px; height: 300px;border-radius: '
+            output += '150px;-webkit-border-radius: 150px;-moz-border-radius: '
+            output += '150px;"> '
+
+            flash("Now logged in as %s" % login_session['username'])
+            return output
+    else:
+        return (render_template('userlogin.html', clothing_types=clothing_types))
 
 
 # Show all items of a clothing type

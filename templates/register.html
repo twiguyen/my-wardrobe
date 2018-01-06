@@ -3,15 +3,15 @@
 {% include "header.html" %}
 {% include "navbar.html" %}
         <div class="col-sm-9">
-            <form>
+            <form method = "post">
                 <div class="form-row">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control mx-sm-3">
+                    <input type="text" name="username" class="form-control mx-sm-3">
                 </div>
 
                 <div class="form-row"> 
                     <label for="password">Password</label>
-                    <input type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline">
+                    <input type="password" name="password" class="form-control mx-sm-3" aria-describedby="passwordHelpInline">
                     <small id="passwordHelpInline" class="text-muted">
                         Must be 8-20 characters long.
                     </small>
@@ -19,17 +19,17 @@
 
                 <div class="form-row">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control mx-sm-3">
+                    <input type="text" name="name" class="form-control mx-sm-3">
                 </div>
 
                 <div class="form-row">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control mx-sm-3">
+                    <input type="text" name="email" class="form-control mx-sm-3">
                 </div>
 
                 <div class="form-row"> 
                         <label for="picture">Picture</label>
-                        <input type="picture" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="pictureHelpInline">
+                        <input type="text" name="picture" class="form-control mx-sm-3" aria-describedby="pictureHelpInline">
                         <small id="pictureHelpInline" class="text-muted">
                             Please provide working URL.
                         </small>
